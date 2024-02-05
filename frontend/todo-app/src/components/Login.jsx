@@ -22,7 +22,7 @@ export default function Login() {
         if (username === 'kadri' && password === 'pass') {
             setShowSuccessMessage(true)
             setShowErrorMessage(false)
-            navigate('/welcome')
+            navigate(`/welcome/${username}`)
         } else {
             setShowSuccessMessage(false)
             setShowErrorMessage(true)
@@ -32,6 +32,7 @@ export default function Login() {
     return (
 
         <div className='Login'>
+            <h1>Login</h1>
             {showSuccessMessage && <div className='successMessage' >Authenticated Successfully!</div>}
             {showErrorMessage && <div className='errorMessage'>Authenticated Failed. Please check your credentials.</div>}
             <div className='LoginForm'>

@@ -3,6 +3,7 @@ import './ToDo.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './Login';
 import Welcome from './Welcome';
+import Error from './Error';
 
 export default function ToDo() {
   return (
@@ -11,7 +12,8 @@ export default function ToDo() {
         <Routes>
           <Route path='/' element={<Login/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
-          <Route path='/welcome' element={<Welcome/>}></Route>
+          <Route path='/welcome/:username' element={<Welcome/>}></Route>
+          <Route path='*' element={<Error/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
