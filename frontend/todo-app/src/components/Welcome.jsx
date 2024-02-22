@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { getHelloPathVariable } from "../api/HelloWorldApiService";
 
 export default function Welcome() {
   const params = useParams();
@@ -8,7 +8,19 @@ export default function Welcome() {
   const [message, setMessage] = useState(null);
 
   function getHelloWorld() {
-    console.log(axios.get("http://localhost:8080/hello"));
+    getHelloPathVariable("Kadri")
+      .then((response) => successfulResponse(response))
+      .catch((error) => errorResponse(error))
+      .finally(() => console.log("cleanup"));
+  }
+
+  function successfulResponse(response) {
+    console.log(response);
+    setMessage(response.data);
+  }
+
+  function errorResponse(error) {
+    console.log(error);
   }
 
   return (

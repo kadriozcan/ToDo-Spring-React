@@ -9,6 +9,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Logout from './components/Logout';
 import AuthProvider, { useAuth } from './components/security/AuthContext';
+import ToDo from './components/ToDo';
 
 function AuthenticatedRoute({ children }) {
   const authContext = useAuth()
@@ -33,6 +34,8 @@ function App() {
               <AuthenticatedRoute><Welcome /></AuthenticatedRoute>} />
 
             <Route path='/todos' element={<AuthenticatedRoute><ListToDos /></AuthenticatedRoute>} />
+
+            <Route path='/todo/:id' element={<AuthenticatedRoute><ToDo /></AuthenticatedRoute>} />
 
             <Route path='/logout' element={<AuthenticatedRoute><Logout /></AuthenticatedRoute>} />
 
