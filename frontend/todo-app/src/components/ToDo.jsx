@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
-  getAllTodosApi,
+  createTodoApi,
   getTodoByUsernameAndId,
   updateTodoApi,
 } from "../api/TodoApiService";
@@ -17,17 +17,41 @@ export default function ToDo() {
   const [description, setDescription] = useState("");
   const [targetDate, setTargetDate] = useState("");
 
+  const navigate = useNavigate();
+
   useEffect(() => fetchTodos(), [id]);
 
   function fetchTodos() {
-    getTodoByUsernameAndId(username, id).then((response) => {
-      setDescription(response.data.description);
-      setTargetDate(response.data.targetDate);
-    });
+    if (id != -1) {
+      getTodoByUsernameAndId(username, id)
+        .then((response) => {
+          setDescription(response.data.description);
+          setTargetDate(response.data.targetDate);
+        })
+        .catch((error) => console.log(error));
+    }
   }
 
   function onSubmit(values) {
-    console.log(values);
+    const todo = {
+      id: id,
+      username: username,
+      description: values.description,
+      targetDate: values.targetDate,
+      done: false,
+    };
+
+    if (id == -1) {
+      createTodoApi(username, todo).then((response) => {
+        navigate("/todos");
+      });
+    } else {
+      updateTodoApi(username, id, todo)
+        .then((response) => {
+          navigate("/todos");
+        })
+        .catch((error) => console.log(error));
+    }
   }
 
   function validate(values) {
@@ -35,7 +59,7 @@ export default function ToDo() {
     if (values.description.length < 5) {
       errors.description = "Enter at least 5 characters!";
     }
-    if (values.targetDate == null) {
+    if (values.targetDate == null || values.targetDate === "") {
       errors.targetDate = "Enter a target date!";
     }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { deleteTodoApi, getAllTodosApi } from "../api/TodoApiService";
 import { useAuth } from "./security/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function ListToDos() {
   const [todos, setTodos] = useState([]);
@@ -33,6 +33,10 @@ export default function ListToDos() {
 
   function updateTodo(id) {
     navigate(`/todo/${id}`);
+  }
+
+  function addNewTodo() {
+    navigate("/todo/-1");
   }
 
   return (
@@ -76,6 +80,9 @@ export default function ListToDos() {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="btn btn-success m-4" onClick={addNewTodo}>
+        Add new ToDo
       </div>
     </div>
   );
