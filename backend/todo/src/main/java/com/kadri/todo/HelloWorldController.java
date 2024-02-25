@@ -9,6 +9,11 @@ import jakarta.websocket.server.PathParam;
 @RestController
 public class HelloWorldController {
 	
+	@GetMapping("/basicauth")
+	public String basicAuthCheck() {
+		return "Success";
+	}
+	
 	@GetMapping("/hello")
 	public String hello() {
 		return "Hello world! v2";
