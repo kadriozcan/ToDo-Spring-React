@@ -1,4 +1,4 @@
-package com.kadri.todo.jwt;
+package com.kadri.todo.security.jwt;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;

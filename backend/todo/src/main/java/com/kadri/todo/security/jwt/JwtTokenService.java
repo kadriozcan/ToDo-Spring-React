@@ -1,4 +1,4 @@
-package com.kadri.todo.jwt;
+package com.kadri.todo.security.jwt;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

@@ -1,4 +1,4 @@
-package com.kadri.todo.jwt;
+package com.kadri.todo.security.jwt;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

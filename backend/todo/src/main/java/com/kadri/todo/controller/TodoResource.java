@@ -1,4 +1,4 @@
-package com.kadri.todo;
+package com.kadri.todo.controller;
 
 import java.util.List;
 
@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.kadri.todo.entity.Todo;
+import com.kadri.todo.service.TodoService;
 
 @RestController
 public class TodoResource {

@@ -1,4 +1,4 @@
-package com.kadri.todo.security;
+package com.kadri.todo.security.basic;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

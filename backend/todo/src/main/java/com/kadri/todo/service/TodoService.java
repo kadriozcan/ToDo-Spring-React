@@ -1,4 +1,4 @@
-package com.kadri.todo;
+package com.kadri.todo.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
+
+import com.kadri.todo.entity.Todo;
 
 @Service
 public class TodoService {

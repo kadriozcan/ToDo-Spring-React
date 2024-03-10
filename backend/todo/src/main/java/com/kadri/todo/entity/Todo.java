@@ -1,9 +1,16 @@
-package com.kadri.todo;
+package com.kadri.todo.entity;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+@Entity
 public class Todo {
 
+	@Id
+	@GeneratedValue
 	private int id;
 	private String username;
 	private String description;

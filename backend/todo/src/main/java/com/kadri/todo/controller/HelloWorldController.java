@@ -1,4 +1,4 @@
-package com.kadri.todo;
+package com.kadri.todo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
