@@ -12,43 +12,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kadri.todo.entity.Todo;
+import com.kadri.todo.repository.TodoRepository;
 import com.kadri.todo.service.TodoService;
 
-//@RestController
-public class TodoResource {
+@RestController
+public class TodoJpaResource {
 
 	private TodoService todoService;
 	
-	public TodoResource(TodoService todoService) {
-		
+	private TodoRepository todoRepository;
+	
+	public TodoJpaResource(TodoService todoService, TodoRepository todoRepository) {
 		this.todoService = todoService;
+		this.todoRepository = todoRepository;
 	}
 
 	@GetMapping("/users/{username}/todos")
 	public List<Todo> getAll(@PathVariable String username) {
-		return todoService.findByUsername(username);
+		return todoRepository.findByUsername(username);
 	}
 	
 	@GetMapping("/users/{username}/todos/{id}")
 	public Todo getById(@PathVariable String username, @PathVariable int id) {
-		return todoService.findById(id);
+		return todoRepository.findById(id).get();
 	}
 	
 	@DeleteMapping("/users/{username}/todos/{id}")
 	public ResponseEntity<Void> delete(@PathVariable String username, @PathVariable int id) {
-		todoService.deleteById(id);
+		todoRepository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PutMapping("/users/{username}/todos/{id}")
 	public Todo update(@PathVariable String username, @PathVariable int id, @RequestBody Todo todo) {
-		todoService.updateTodo(todo);
+		todoRepository.save(todo);
 		return todo;
 	}
 	
 	@PostMapping("/users/{username}/todos")
 	public Todo update(@PathVariable String username, @RequestBody Todo todo) {
-		Todo createdTodo = todoService.addTodo(username, todo.getDescription(), todo.getTargetDate(), todo.isDone());
-		return createdTodo;
+		todo.setUsername(username);
+		todo.setId(null);
+		
+		return todoRepository.save(todo);
 	}
 }
